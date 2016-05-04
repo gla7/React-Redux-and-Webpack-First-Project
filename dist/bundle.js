@@ -19798,14 +19798,7 @@
 		function PageContent() {
 			_classCallCheck(this, PageContent);
 
-<<<<<<< HEAD
 			return _possibleConstructorReturn(this, Object.getPrototypeOf(PageContent).apply(this, arguments));
-=======
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PageContent).call(this, props, context));
-
-			_this.state = { status: false };
-			return _this;
->>>>>>> master
 		}
 
 		_createClass(PageContent, [{
@@ -19814,7 +19807,7 @@
 
 			// constructor(props, context) {
 			// 	super(props, context)
-			// 	this.state = {status: true}
+			// 	this.state = {status: false}
 			// }
 
 			value: function render() {
