@@ -19780,7 +19780,10 @@
 					_react2.default.createElement(
 						'h1',
 						null,
-						'Regarding your job offer'
+						'Regarding ',
+						this.props.wholeStatus.name,
+						'\'s job offer: ',
+						this.props.wholeStatus.job.jobTitle
 					),
 					_react2.default.createElement(_PageContent2.default, { wholeState: this.props.wholeStatus, allActions: this.props.actions })
 				);
@@ -19820,6 +19823,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _JobDescription = __webpack_require__(194);
+
+	var _JobDescription2 = _interopRequireDefault(_JobDescription);
+
 	var _Buttons = __webpack_require__(162);
 
 	var _Buttons2 = _interopRequireDefault(_Buttons);
@@ -19850,7 +19857,8 @@
 		_createClass(PageContent, [{
 			key: 'render',
 			value: function render() {
-				var text = !this.props.wholeState.answer.isAnswered ? 'This is the description of your assignment and the due date. Do you accept?' : 'Thanks for your response.';
+				// let text = !this.props.wholeState.answer.isAnswered ?  this.props.wholeState.job.jobDescription +'Do you accept?' : 'Thanks for your response.';
+				// last line is associated with the following JSX in the below render method: <div>{text}</div>
 				// let hide = cx({
 				// 	hideIt : this.props.wholeState.answer.isAnswered
 				// })
@@ -19858,11 +19866,7 @@
 					return _react2.default.createElement(
 						'div',
 						null,
-						_react2.default.createElement(
-							'div',
-							null,
-							text
-						),
+						_react2.default.createElement(_JobDescription2.default, { wholeState: this.props.wholeState }),
 						_react2.default.createElement(_Buttons2.default, { wholeState: this.props.wholeState, allActions: this.props.allActions })
 					);
 				} else {
@@ -22100,6 +22104,86 @@
 		}
 	}());
 
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Buttons = __webpack_require__(162);
+
+	var _Buttons2 = _interopRequireDefault(_Buttons);
+
+	var _classnames = __webpack_require__(193);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var JobDescription = function (_Component) {
+		_inherits(JobDescription, _Component);
+
+		function JobDescription() {
+			_classCallCheck(this, JobDescription);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(JobDescription).apply(this, arguments));
+		}
+
+		_createClass(JobDescription, [{
+			key: 'render',
+			value: function render() {
+
+				if (!this.props.wholeState.answer.isAnswered) {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Job Description:'
+						),
+						_react2.default.createElement(
+							'h6',
+							null,
+							this.props.wholeState.job.jobDescription,
+							'  Do you accept?'
+						)
+					);
+				} else {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Thanks for your response.'
+						)
+					);
+				}
+			}
+		}]);
+
+		return JobDescription;
+	}(_react.Component);
+
+	exports.default = JobDescription;
 
 /***/ }
 /******/ ]);

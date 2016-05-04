@@ -11,7 +11,7 @@ class App extends Component {
 		console.log(this)
 		return ( 
 			<div>
-				<h1>Regarding your job offer</h1>
+				<h1>Regarding {this.props.wholeStatus.name}'s job offer: {this.props.wholeStatus.job.jobTitle}</h1>
 				<PageContent wholeState={this.props.wholeStatus} allActions={this.props.actions}/>
 			</div>
 		)
