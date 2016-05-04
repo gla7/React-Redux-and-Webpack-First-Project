@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'
 
 let initialState = {
 	status : true,
+	accepted : false,
+	rejected : false,
 }
 
 let store = configureStore(initialState)

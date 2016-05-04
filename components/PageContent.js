@@ -4,20 +4,12 @@ import Buttons from './Buttons'
 
 class PageContent extends Component {
 
-
-	// constructor(props, context) {
-	// 	super(props, context)
-	// 	this.state = {status: false}
-	// }
-
-
 	render() {
-		
 
-		if (this.props.status) {
+		if (this.props.wholeState.status) {
 			return  <div>
 						<div>This is the description of your assignment and the due date. Do you accept?</div>
-						<Buttons />
+						<Buttons wholeState={this.props.wholeState} allActions={this.props.allActions}/>
 					</div>
 		} else {
 			return  <div>

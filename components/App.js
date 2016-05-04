@@ -8,10 +8,11 @@ import actions from '../redux/actions'
 class App extends Component {
 
 	render () {
+		console.log(this)
 		return ( 
 			<div>
 				<h1>Regarding your job offer</h1>
-				<PageContent status={this.props.status}/>
+				<PageContent wholeState={this.props.wholeStatus} allActions={this.props.actions}/>
 			</div>
 		)
 	}
@@ -19,7 +20,9 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-	return state
+	return {
+		wholeStatus: state
+	}
 }
 
 function mapDispatchToProps(dispatch) {

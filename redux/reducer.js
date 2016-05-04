@@ -3,35 +3,18 @@ let reducer = function(state, action) {
 	switch (action.type) {
 		case 'SET_STATUS':
 			return Object.assign({}, state, {
-				status: !status
+				status: action.status
 			})
 	
+		case 'ACCEPTED':
+			return Object.assign({}, state, {
+				accepted: action.accepted
+			})
 
-	// switch (action.type) {
-	// 	case 'ADD_TODO': 
-	// 		return Object.assign({}, state, {
-	// 			todos: [
-	// 				{
-	// 					text: action.text,
-	// 					completed: false,
-	// 					id: getId(state)
-	// 				}, 
-	// 				...state.todos
-	// 			]
-	// 		}) 
-	// 	case 'COMPLETE_TODO':
-	// 		return Object.assign({}, state, {
-	// 			todos: state.todos.map((todo) => {
-	// 				return todo.id === action.id ? Object.assign({}, todo, {completed: !todo.completed}) : todo
-	// 			})
-	// 		})
-
-	// 	case 'DELETE_TODO':
-	// 		return Object.assign({}, state, {
-	// 			todos: state.todos.filter((todo) => {
-	// 				return todo.id !== action.id
-	// 			})
-	// 		})
+		case 'REJECTED':
+			return Object.assign({}, state, {
+				rejected: action.rejected
+			})
 
 		default: return state;
 	}

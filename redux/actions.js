@@ -5,28 +5,21 @@ let actions = {
 			type: 'SET_STATUS',
 			status: status
 		}
+	},
+
+	accepted: function(accepted) {
+		return {
+			type: 'ACCEPTED',
+			accepted: accepted
+		}
+	},
+
+	rejected: function(rejected) {
+		return {
+			type: 'REJECTED',
+			rejected: rejected
+		}
 	}
-
-	// addTodo: function(text) {
-	// 	return {
-	// 		type: 'ADD_TODO',
-	// 		text: text
-	// 	}
-	// },
-
-	// completeTodo: function(id) {
-	// 	return {
-	// 		type: 'COMPLETE_TODO',
-	// 		id: id
-	// 	}
-	// },
-
-	// deleteTodo: function(id) {
-	// 	return {
-	// 		type: 'DELETE_TODO',
-	// 		id: id
-	// 	}
-	// }
 
 }
 

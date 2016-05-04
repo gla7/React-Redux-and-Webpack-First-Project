@@ -72,7 +72,9 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var initialState = {
-		status: true
+		status: true,
+		accepted: false,
+		rejected: false
 	};
 
 	var store = (0, _store2.default)(initialState);
@@ -19736,6 +19738,7 @@
 		_createClass(App, [{
 			key: 'render',
 			value: function render() {
+				console.log(this);
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -19744,7 +19747,7 @@
 						null,
 						'Regarding your job offer'
 					),
-					_react2.default.createElement(_PageContent2.default, { status: this.props.status })
+					_react2.default.createElement(_PageContent2.default, { wholeState: this.props.wholeStatus, allActions: this.props.actions })
 				);
 			}
 		}]);
@@ -19753,7 +19756,9 @@
 	}(_react.Component);
 
 	function mapStateToProps(state) {
-		return state;
+		return {
+			wholeStatus: state
+		};
 	}
 
 	function mapDispatchToProps(dispatch) {
@@ -19803,16 +19808,9 @@
 
 		_createClass(PageContent, [{
 			key: 'render',
-
-
-			// constructor(props, context) {
-			// 	super(props, context)
-			// 	this.state = {status: false}
-			// }
-
 			value: function render() {
 
-				if (this.props.status) {
+				if (this.props.wholeState.status) {
 					return _react2.default.createElement(
 						'div',
 						null,
@@ -19821,7 +19819,7 @@
 							null,
 							'This is the description of your assignment and the due date. Do you accept?'
 						),
-						_react2.default.createElement(_Buttons2.default, null)
+						_react2.default.createElement(_Buttons2.default, { wholeState: this.props.wholeState, allActions: this.props.allActions })
 					);
 				} else {
 					return _react2.default.createElement(
@@ -19873,65 +19871,58 @@
 	var Buttons = function (_Component) {
 		_inherits(Buttons, _Component);
 
-		_createClass(Buttons, [{
-			key: 'clickYes',
-			value: function clickYes() {
-				console.log("You clicked yes");
-				this.setState({
-					status: 1
-				});
-			}
-		}, {
-			key: 'clickNo',
-			value: function clickNo() {
-				console.log("You clicked no");
-				this.setState({
-					status: 2
-				});
-			}
-		}]);
-
-		function Buttons(props, context) {
+		function Buttons() {
 			_classCallCheck(this, Buttons);
 
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Buttons).call(this, props, context));
-
-			_this.state = { status: 0 };
-			return _this;
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Buttons).apply(this, arguments));
 		}
 
 		_createClass(Buttons, [{
+			key: 'handleYes',
+			value: function handleYes() {
+				this.props.allActions.accepted(true);
+				this.props.allActions.rejected(false);
+			}
+		}, {
+			key: 'handleNo',
+			value: function handleNo() {
+				this.props.allActions.accepted(false);
+				this.props.allActions.rejected(true);
+			}
+		}, {
 			key: 'render',
 			value: function render() {
-				console.log(this);
-				console.log(Buttons);
-				if (this.state.status === 0) {
+				// console.log(this.props.allActions)
+				// console.log(this.wholeState)
+				// console.log(this.props.wholeState)
+				// console.log(this.props.wholeState.rejected)
+				if (this.props.wholeState.accepted === false && this.props.wholeState.rejected === false) {
 					return _react2.default.createElement(
 						'div',
 						null,
 						_react2.default.createElement(
 							'button',
-							{ onClick: this.clickYes.bind(this) },
+							{ onClick: this.handleYes.bind(this) },
 							'Yes'
 						),
 						_react2.default.createElement(
 							'button',
-							{ onClick: this.clickNo.bind(this) },
+							{ onClick: this.handleNo.bind(this) },
 							'No'
 						)
 					);
-				} else if (this.state.status === 2) {
+				} else if (this.props.wholeState.accepted === false && this.props.wholeState.rejected === true) {
 					return _react2.default.createElement(
 						'div',
 						null,
 						_react2.default.createElement(
 							'button',
-							{ onClick: this.clickYes.bind(this) },
+							{ onClick: this.handleYes.bind(this) },
 							'Yes'
 						),
 						_react2.default.createElement(
 							'button',
-							{ onClick: this.clickNo.bind(this) },
+							{ onClick: this.handleNo.bind(this) },
 							'No'
 						),
 						_react2.default.createElement(
@@ -19956,12 +19947,12 @@
 						null,
 						_react2.default.createElement(
 							'button',
-							{ onClick: this.clickYes.bind(this) },
+							{ onClick: this.handleYes.bind(this) },
 							'Yes'
 						),
 						_react2.default.createElement(
 							'button',
-							{ onClick: this.clickNo.bind(this) },
+							{ onClick: this.handleNo.bind(this) },
 							'No'
 						),
 						_react2.default.createElement(
@@ -19991,66 +19982,35 @@
 
 /***/ },
 /* 163 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
+	// import React, { Component } from 'react'
+
+	// class ClickedYes extends Component {
+
+	// 	constructor(props, context) {
+	// 		super(props, context)
+	// 		this.state = {status: true}
+	// 	}
+
+	// 	render() {
+	// 		if ( this.state.status ) {
+	// 			console.log("Something displayed")
+	// 			return  <div>
+	// 						<div>Please give us some feedback</div>
+	// 						<input></input>
+	// 					</div>
+	// 		} else {
+	// 			console.log("Nothing displayed")
+	// 			return  <div>
+
+	// 					</div>
+	// 		}
+	// 	}
+	// }
+
+	// export default ClickedYes
 	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ClickedYes = function (_Component) {
-		_inherits(ClickedYes, _Component);
-
-		function ClickedYes(props, context) {
-			_classCallCheck(this, ClickedYes);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ClickedYes).call(this, props, context));
-
-			_this.state = { status: true };
-			return _this;
-		}
-
-		_createClass(ClickedYes, [{
-			key: "render",
-			value: function render() {
-				if (this.state.status) {
-					console.log("Something displayed");
-					return _react2.default.createElement(
-						"div",
-						null,
-						_react2.default.createElement(
-							"div",
-							null,
-							"Please give us some feedback"
-						),
-						_react2.default.createElement("input", null)
-					);
-				} else {
-					console.log("Nothing displayed");
-					return _react2.default.createElement("div", null);
-				}
-			}
-		}]);
-
-		return ClickedYes;
-	}(_react.Component);
-
-	exports.default = ClickedYes;
 
 /***/ },
 /* 164 */
@@ -21768,28 +21728,21 @@
 				type: 'SET_STATUS',
 				status: status
 			};
+		},
+
+		accepted: function accepted(_accepted) {
+			return {
+				type: 'ACCEPTED',
+				accepted: _accepted
+			};
+		},
+
+		rejected: function rejected(_rejected) {
+			return {
+				type: 'REJECTED',
+				rejected: _rejected
+			};
 		}
-
-		// addTodo: function(text) {
-		// 	return {
-		// 		type: 'ADD_TODO',
-		// 		text: text
-		// 	}
-		// },
-
-		// completeTodo: function(id) {
-		// 	return {
-		// 		type: 'COMPLETE_TODO',
-		// 		id: id
-		// 	}
-		// },
-
-		// deleteTodo: function(id) {
-		// 	return {
-		// 		type: 'DELETE_TODO',
-		// 		id: id
-		// 	}
-		// }
 
 	};
 
@@ -21841,34 +21794,18 @@
 		switch (action.type) {
 			case 'SET_STATUS':
 				return Object.assign({}, state, {
-					status: !status
+					status: action.status
 				});
 
-			// switch (action.type) {
-			// 	case 'ADD_TODO':
-			// 		return Object.assign({}, state, {
-			// 			todos: [
-			// 				{
-			// 					text: action.text,
-			// 					completed: false,
-			// 					id: getId(state)
-			// 				},
-			// 				...state.todos
-			// 			]
-			// 		})
-			// 	case 'COMPLETE_TODO':
-			// 		return Object.assign({}, state, {
-			// 			todos: state.todos.map((todo) => {
-			// 				return todo.id === action.id ? Object.assign({}, todo, {completed: !todo.completed}) : todo
-			// 			})
-			// 		})
+			case 'ACCEPTED':
+				return Object.assign({}, state, {
+					accepted: action.accepted
+				});
 
-			// 	case 'DELETE_TODO':
-			// 		return Object.assign({}, state, {
-			// 			todos: state.todos.filter((todo) => {
-			// 				return todo.id !== action.id
-			// 			})
-			// 		})
+			case 'REJECTED':
+				return Object.assign({}, state, {
+					rejected: action.rejected
+				});
 
 			default:
 				return state;
