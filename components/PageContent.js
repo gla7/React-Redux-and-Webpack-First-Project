@@ -4,11 +4,11 @@ import Buttons from './Buttons'
 
 class PageContent extends Component {
 
-	// constructor(props, context) {
-	// 	super(props, context)
-	// 	this.state = {status: true}
-	// }
 
+	constructor(props, context) {
+		super(props, context)
+		this.state = {status: false}
+	}
 
 
 	render() {
