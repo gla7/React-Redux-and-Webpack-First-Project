@@ -72,9 +72,11 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var initialState = {
-		status: true,
-		accepted: false,
-		rejected: false
+		isAvailable: true,
+		answer: {
+			isAnswered: false,
+			isAccepted: false
+		}
 	};
 
 	var store = (0, _store2.default)(initialState);
@@ -19789,6 +19791,10 @@
 
 	var _Buttons2 = _interopRequireDefault(_Buttons);
 
+	var _classnames = __webpack_require__(194);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19796,6 +19802,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// let cx = classNames.bind(document.getElementById('style'))
 
 	var PageContent = function (_Component) {
 		_inherits(PageContent, _Component);
@@ -19809,15 +19817,18 @@
 		_createClass(PageContent, [{
 			key: 'render',
 			value: function render() {
-
-				if (this.props.wholeState.status) {
+				var text = !this.props.wholeState.answer.isAnswered ? 'This is the description of your assignment and the due date. Do you accept?' : 'Thanks for your response.';
+				// let hide = cx({
+				// 	hideIt : this.props.wholeState.answer.isAnswered
+				// })
+				if (this.props.wholeState.isAvailable) {
 					return _react2.default.createElement(
 						'div',
 						null,
 						_react2.default.createElement(
 							'div',
 							null,
-							'This is the description of your assignment and the due date. Do you accept?'
+							text
 						),
 						_react2.default.createElement(_Buttons2.default, { wholeState: this.props.wholeState, allActions: this.props.allActions })
 					);
@@ -19856,9 +19867,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ClickedYes = __webpack_require__(163);
+	var _classnames = __webpack_require__(194);
 
-	var _ClickedYes2 = _interopRequireDefault(_ClickedYes);
+	var _classnames2 = _interopRequireDefault(_classnames);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19880,14 +19891,12 @@
 		_createClass(Buttons, [{
 			key: 'handleYes',
 			value: function handleYes() {
-				this.props.allActions.accepted(true);
-				this.props.allActions.rejected(false);
+				this.props.allActions.isAnswered(true);
 			}
 		}, {
 			key: 'handleNo',
 			value: function handleNo() {
-				this.props.allActions.accepted(false);
-				this.props.allActions.rejected(true);
+				this.props.allActions.isAnswered(false);
 			}
 		}, {
 			key: 'render',
@@ -19896,7 +19905,8 @@
 				// console.log(this.wholeState)
 				// console.log(this.props.wholeState)
 				// console.log(this.props.wholeState.rejected)
-				if (this.props.wholeState.accepted === false && this.props.wholeState.rejected === false) {
+				// className={(this.state.accepted, 'hide')
+				if (!this.props.wholeState.answer.isAnswered) {
 					return _react2.default.createElement(
 						'div',
 						null,
@@ -19909,68 +19919,50 @@
 							'button',
 							{ onClick: this.handleNo.bind(this) },
 							'No'
-						)
-					);
-				} else if (this.props.wholeState.accepted === false && this.props.wholeState.rejected === true) {
-					return _react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.handleYes.bind(this) },
-							'Yes'
-						),
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.handleNo.bind(this) },
-							'No'
-						),
-						_react2.default.createElement(
-							'div',
-							null,
-							_react2.default.createElement(
-								'div',
-								null,
-								'Please give us some feedback:'
-							),
-							_react2.default.createElement('textarea', { rows: '4', cols: '50' }),
-							_react2.default.createElement(
-								'button',
-								null,
-								'Send'
-							)
 						)
 					);
 				} else {
-					return _react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.handleYes.bind(this) },
-							'Yes'
-						),
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.handleNo.bind(this) },
-							'No'
-						),
-						_react2.default.createElement(
+					if (!this.props.wholeState.answer.isAccepted) {
+						return _react2.default.createElement(
 							'div',
 							null,
 							_react2.default.createElement(
 								'div',
 								null,
-								'Why are you a good candidate for the job?'
-							),
-							_react2.default.createElement('textarea', { rows: '4', cols: '50' }),
-							_react2.default.createElement(
-								'button',
-								null,
-								'Send'
+								_react2.default.createElement(
+									'div',
+									null,
+									'Please give us some feedback:'
+								),
+								_react2.default.createElement('textarea', { rows: '4', cols: '50' }),
+								_react2.default.createElement(
+									'button',
+									null,
+									'Send'
+								)
 							)
-						)
-					);
+						);
+					} else {
+						return _react2.default.createElement(
+							'div',
+							null,
+							_react2.default.createElement(
+								'div',
+								null,
+								_react2.default.createElement(
+									'div',
+									null,
+									'Why are you a good candidate for the job?'
+								),
+								_react2.default.createElement('textarea', { rows: '4', cols: '50' }),
+								_react2.default.createElement(
+									'button',
+									null,
+									'Send'
+								)
+							)
+						);
+					}
 				}
 			}
 		}]);
@@ -19981,38 +19973,7 @@
 	exports.default = Buttons;
 
 /***/ },
-/* 163 */
-/***/ function(module, exports) {
-
-	// import React, { Component } from 'react'
-
-	// class ClickedYes extends Component {
-
-	// 	constructor(props, context) {
-	// 		super(props, context)
-	// 		this.state = {status: true}
-	// 	}
-
-	// 	render() {
-	// 		if ( this.state.status ) {
-	// 			console.log("Something displayed")
-	// 			return  <div>
-	// 						<div>Please give us some feedback</div>
-	// 						<input></input>
-	// 					</div>
-	// 		} else {
-	// 			console.log("Nothing displayed")
-	// 			return  <div>
-
-	// 					</div>
-	// 		}
-	// 	}
-	// }
-
-	// export default ClickedYes
-	"use strict";
-
-/***/ },
+/* 163 */,
 /* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -21723,24 +21684,17 @@
 	});
 	var actions = {
 
-		setStatus: function setStatus(status) {
+		isAvailable: function isAvailable(available) {
 			return {
-				type: 'SET_STATUS',
-				status: status
+				type: 'IS_AVAILABLE',
+				available: available
 			};
 		},
 
-		accepted: function accepted(_accepted) {
+		isAnswered: function isAnswered(response) {
 			return {
-				type: 'ACCEPTED',
-				accepted: _accepted
-			};
-		},
-
-		rejected: function rejected(_rejected) {
-			return {
-				type: 'REJECTED',
-				rejected: _rejected
+				type: 'IS_ANSWERED',
+				response: response
 			};
 		}
 
@@ -21771,7 +21725,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var finalCreateStore = (0, _redux.compose)((0, _redux.applyMiddleware)((0, _reduxLogger2.default)()))(_redux.createStore);
+	var finalCreateStore = (0, _redux.compose)((0, _redux.applyMiddleware)((0, _reduxLogger2.default)()), window.devToolsExtension ? window.devToolsExtension() : function (f) {
+		return f;
+	})(_redux.createStore);
 
 	function configureStore() {
 		var initialState = arguments.length <= 0 || arguments[0] === undefined ? { status: true } : arguments[0];
@@ -21792,19 +21748,17 @@
 	var reducer = function reducer(state, action) {
 
 		switch (action.type) {
-			case 'SET_STATUS':
+			case 'IS_AVAILABLE':
 				return Object.assign({}, state, {
-					status: action.status
+					isAvailable: action.available
 				});
 
-			case 'ACCEPTED':
+			case 'IS_ANSWERED':
 				return Object.assign({}, state, {
-					accepted: action.accepted
-				});
-
-			case 'REJECTED':
-				return Object.assign({}, state, {
-					rejected: action.rejected
+					answer: {
+						isAnswered: true,
+						isAccepted: action.response
+					}
 				});
 
 			default:
@@ -22046,6 +22000,60 @@
 	}
 
 	module.exports = createLogger;
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
 
 /***/ }
 /******/ ]);
