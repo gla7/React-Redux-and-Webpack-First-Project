@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import ClickedYes from './ClickedYes'
 
 
 
 class Buttons extends Component {
 
-	handleYes() {
+	handleYes(value) {
 		this.props.allActions.accepted(true)
 		this.props.allActions.rejected(false)
+		console.log("DRGEGERE")
+		console.log(value)
 	}
 
 	handleNo() {
