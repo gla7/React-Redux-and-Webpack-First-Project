@@ -6,7 +6,7 @@ class PageContent extends Component {
 
 	constructor(props, context) {
 		super(props, context)
-		this.state = {status: true}
+		this.state = {status: false}
 	}
 
 	render() {

@@ -19800,7 +19800,7 @@
 
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PageContent).call(this, props, context));
 
-			_this.state = { status: true };
+			_this.state = { status: false };
 			return _this;
 		}
 
