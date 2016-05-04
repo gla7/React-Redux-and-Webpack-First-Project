@@ -76,7 +76,13 @@
 		answer: {
 			isAnswered: false,
 			isAccepted: false
-		}
+		},
+		name: "Joey",
+		job: {
+			jobTitle: "Promote me",
+			jobDescription: "Use promoting skillz to promote me"
+		},
+		rateOffered: 1000
 	};
 
 	var store = (0, _store2.default)(initialState);
@@ -86,6 +92,33 @@
 		{ store: store },
 		_react2.default.createElement(_App2.default, null)
 	), document.getElementById('app'));
+
+	// $.post('/getUserInfo',user).then(function (response) {
+
+	// 	let initialState = {
+	// 		isAvailable         : response.data.isAvailable,
+	// 		answer              : {
+	// 									isAnswered: false,
+	// 									isAccepted: false
+	// 								}
+	// 		name                : response.data.name,
+	// 		job                 : { 
+	// 									jobTitle       : response.data.job.jobTitle,
+	// 									jobDescription : response.data.job.jobDescription,
+	// 								},
+	// 		rateOffered         : response.data.rateOffered,
+	// 	}
+
+	// 	let store = configureStore(initialState)
+
+	// 	render(
+	// 		<Provider store={store}>
+	// 			<App />
+	// 		</Provider>,
+	// 		document.getElementById('app')
+	// 	)
+
+	// })
 
 /***/ },
 /* 2 */
@@ -19791,7 +19824,7 @@
 
 	var _Buttons2 = _interopRequireDefault(_Buttons);
 
-	var _classnames = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"classnames\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _classnames = __webpack_require__(193);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -19867,7 +19900,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"classnames\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _classnames = __webpack_require__(193);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -21999,6 +22032,60 @@
 	}
 
 	module.exports = createLogger;
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
 
 /***/ }
 /******/ ]);
