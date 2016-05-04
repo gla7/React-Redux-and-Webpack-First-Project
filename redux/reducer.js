@@ -1,19 +1,17 @@
 let reducer = function(state, action) {
 
 	switch (action.type) {
-		case 'SET_STATUS':
+		case 'IS_AVAILABLE':
 			return Object.assign({}, state, {
-				status: action.status
+				isAvailable: action.available
 			})
 	
-		case 'ACCEPTED':
+		case 'IS_ANSWERED':
 			return Object.assign({}, state, {
-				accepted: action.accepted
-			})
-
-		case 'REJECTED':
-			return Object.assign({}, state, {
-				rejected: action.rejected
+				answer: {
+					isAnswered: true,
+					isAccepted: action.response
+				}
 			})
 
 		default: return state;

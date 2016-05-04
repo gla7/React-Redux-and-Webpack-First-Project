@@ -1,25 +1,18 @@
 let actions = {
 
-	setStatus: function(status) {
+	isAvailable: function(available) {
 		return {
-			type: 'SET_STATUS',
-			status: status
+			type: 'IS_AVAILABLE',
+			available: available
 		}
 	},
 
-	accepted: function(accepted) {
+	isAnswered: function(response) {
 		return {
-			type: 'ACCEPTED',
-			accepted: accepted
+			type: 'IS_ANSWERED',
+			response: response
 		}
 	},
-
-	rejected: function(rejected) {
-		return {
-			type: 'REJECTED',
-			rejected: rejected
-		}
-	}
 
 }
 

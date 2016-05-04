@@ -5,9 +5,11 @@ import configureStore from '../redux/store'
 import { Provider } from 'react-redux'
 
 let initialState = {
-	status : true,
-	accepted : false,
-	rejected : false,
+	isAvailable : true,
+	answer : {
+		isAnswered: false,
+		isAccepted: false
+	}
 }
 
 let store = configureStore(initialState)
