@@ -19744,7 +19744,7 @@
 						null,
 						'Regarding your job offer'
 					),
-					_react2.default.createElement(_PageContent2.default, null)
+					_react2.default.createElement(_PageContent2.default, { status: this.props.status })
 				);
 			}
 		}]);
@@ -19795,20 +19795,31 @@
 	var PageContent = function (_Component) {
 		_inherits(PageContent, _Component);
 
-		function PageContent(props, context) {
+		function PageContent() {
 			_classCallCheck(this, PageContent);
 
+<<<<<<< HEAD
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(PageContent).apply(this, arguments));
+=======
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PageContent).call(this, props, context));
 
 			_this.state = { status: false };
 			return _this;
+>>>>>>> master
 		}
 
 		_createClass(PageContent, [{
 			key: 'render',
+
+
+			// constructor(props, context) {
+			// 	super(props, context)
+			// 	this.state = {status: true}
+			// }
+
 			value: function render() {
-				console.log(this);
-				if (this.state.status) {
+
+				if (this.props.status) {
 					return _react2.default.createElement(
 						'div',
 						null,
@@ -21752,12 +21763,19 @@
 /* 190 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 	var actions = {
+
+		setStatus: function setStatus(status) {
+			return {
+				type: 'SET_STATUS',
+				status: status
+			};
+		}
 
 		// addTodo: function(text) {
 		// 	return {
@@ -21812,6 +21830,7 @@
 	function configureStore() {
 		var initialState = arguments.length <= 0 || arguments[0] === undefined ? { status: true } : arguments[0];
 
+		// console.log(initialState)
 		return finalCreateStore(_reducer2.default, initialState);
 	}
 
@@ -21819,40 +21838,48 @@
 /* 192 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 	var reducer = function reducer(state, action) {
-		// switch (action.type) {
-		// 	case 'ADD_TODO':
-		// 		return Object.assign({}, state, {
-		// 			todos: [
-		// 				{
-		// 					text: action.text,
-		// 					completed: false,
-		// 					id: getId(state)
-		// 				},
-		// 				...state.todos
-		// 			]
-		// 		})
-		// 	case 'COMPLETE_TODO':
-		// 		return Object.assign({}, state, {
-		// 			todos: state.todos.map((todo) => {
-		// 				return todo.id === action.id ? Object.assign({}, todo, {completed: !todo.completed}) : todo
-		// 			})
-		// 		})
 
-		// 	case 'DELETE_TODO':
-		// 		return Object.assign({}, state, {
-		// 			todos: state.todos.filter((todo) => {
-		// 				return todo.id !== action.id
-		// 			})
-		// 		})
+		switch (action.type) {
+			case 'SET_STATUS':
+				return Object.assign({}, state, {
+					status: !status
+				});
 
-		// 	default: return state;
-		// }
+			// switch (action.type) {
+			// 	case 'ADD_TODO':
+			// 		return Object.assign({}, state, {
+			// 			todos: [
+			// 				{
+			// 					text: action.text,
+			// 					completed: false,
+			// 					id: getId(state)
+			// 				},
+			// 				...state.todos
+			// 			]
+			// 		})
+			// 	case 'COMPLETE_TODO':
+			// 		return Object.assign({}, state, {
+			// 			todos: state.todos.map((todo) => {
+			// 				return todo.id === action.id ? Object.assign({}, todo, {completed: !todo.completed}) : todo
+			// 			})
+			// 		})
+
+			// 	case 'DELETE_TODO':
+			// 		return Object.assign({}, state, {
+			// 			todos: state.todos.filter((todo) => {
+			// 				return todo.id !== action.id
+			// 			})
+			// 		})
+
+			default:
+				return state;
+		}
 	};
 
 	exports.default = reducer;

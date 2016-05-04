@@ -1,4 +1,12 @@
 let reducer = function(state, action) {
+
+	switch (action.type) {
+		case 'SET_STATUS':
+			return Object.assign({}, state, {
+				status: !status
+			})
+	
+
 	// switch (action.type) {
 	// 	case 'ADD_TODO': 
 	// 		return Object.assign({}, state, {
@@ -25,8 +33,8 @@ let reducer = function(state, action) {
 	// 			})
 	// 		})
 
-	// 	default: return state;
-	// }
+		default: return state;
+	}
 }
 
 export default reducer
