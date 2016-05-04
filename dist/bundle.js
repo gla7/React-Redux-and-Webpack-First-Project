@@ -19925,11 +19925,25 @@
 			key: 'handleYes',
 			value: function handleYes() {
 				this.props.allActions.isAnswered(true);
+				// $.post('/saidYes',user).then(function (err,response) {
+				// 	if (err) {
+				// 		console.log("Something went wrong!")
+				// 	} else {
+				// 		this.props.allActions.isAnswered(true)
+				// 	}
+				// })
 			}
 		}, {
 			key: 'handleNo',
 			value: function handleNo() {
 				this.props.allActions.isAnswered(false);
+				// $.post('/saidNo',user).then(function (err,response) {
+				// 	if (err) {
+				// 		console.log("Something went wrong!")
+				// 	} else {
+				// 		this.props.allActions.isAnswered(false)
+				// 	}
+				// })
 			}
 		}, {
 			key: 'render',

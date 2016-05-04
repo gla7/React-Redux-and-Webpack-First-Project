@@ -7,10 +7,24 @@ class Buttons extends Component {
 
 	handleYes() {
 		this.props.allActions.isAnswered(true)
+		// $.post('/saidYes',user).then(function (err,response) {
+		// 	if (err) {
+		// 		console.log("Something went wrong!")
+		// 	} else {
+		// 		this.props.allActions.isAnswered(true)
+		// 	}
+		// })
 	}
 
 	handleNo() {
 		this.props.allActions.isAnswered(false)
+		// $.post('/saidNo',user).then(function (err,response) {
+		// 	if (err) {
+		// 		console.log("Something went wrong!")
+		// 	} else {
+		// 		this.props.allActions.isAnswered(false)
+		// 	}
+		// })
 	}
 
 	render() {
