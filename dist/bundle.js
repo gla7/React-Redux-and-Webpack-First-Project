@@ -19901,7 +19901,7 @@
 			value: function render() {
 				console.log(this);
 				console.log(Buttons);
-				if (this.state.status === 0 || this.state.status === 2) {
+				if (this.state.status === 0) {
 					return _react2.default.createElement(
 						'div',
 						null,
@@ -19914,6 +19914,36 @@
 							'button',
 							{ onClick: this.clickNo.bind(this) },
 							'No'
+						)
+					);
+				} else if (this.state.status === 2) {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'button',
+							{ onClick: this.clickYes.bind(this) },
+							'Yes'
+						),
+						_react2.default.createElement(
+							'button',
+							{ onClick: this.clickNo.bind(this) },
+							'No'
+						),
+						_react2.default.createElement(
+							'div',
+							null,
+							_react2.default.createElement(
+								'div',
+								null,
+								'Please give us some feedback:'
+							),
+							_react2.default.createElement('textarea', { rows: '4', cols: '50' }),
+							_react2.default.createElement(
+								'button',
+								null,
+								'Send'
+							)
 						)
 					);
 				} else {
@@ -19936,9 +19966,14 @@
 							_react2.default.createElement(
 								'div',
 								null,
-								'Please give us some feedback'
+								'Why are you a good candidate for the job?'
 							),
-							_react2.default.createElement('input', null)
+							_react2.default.createElement('textarea', { rows: '4', cols: '50' }),
+							_react2.default.createElement(
+								'button',
+								null,
+								'Send'
+							)
 						)
 					);
 				}
