@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/kweiberth/react-todo-list.git"
   },
-  "author": "Kurt Weiberth",
+  "author": "Gabriel Leon",
   "license": "ISC",
   "dependencies": {
     "babel-core": "^6.4.5",
