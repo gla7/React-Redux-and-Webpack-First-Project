@@ -11,7 +11,7 @@ class App extends Component {
 		return ( 
 			<div>
 				<h1>Regarding your job offer</h1>
-				<PageContent />
+				<PageContent status={this.props.status}/>
 			</div>
 		)
 	}

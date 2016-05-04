@@ -1,5 +1,12 @@
 let actions = {
 
+	setStatus: function(status) {
+		return {
+			type: 'SET_STATUS',
+			status: status
+		}
+	}
+
 	// addTodo: function(text) {
 	// 	return {
 	// 		type: 'ADD_TODO',

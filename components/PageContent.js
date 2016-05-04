@@ -4,14 +4,17 @@ import Buttons from './Buttons'
 
 class PageContent extends Component {
 
-	constructor(props, context) {
-		super(props, context)
-		this.state = {status: true}
-	}
+	// constructor(props, context) {
+	// 	super(props, context)
+	// 	this.state = {status: true}
+	// }
+
+
 
 	render() {
-		console.log(this)
-		if (this.state.status) {
+		
+
+		if (this.props.status) {
 			return  <div>
 						<div>This is the description of your assignment and the due date. Do you accept?</div>
 						<Buttons />
