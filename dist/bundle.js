@@ -63,13 +63,31 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _store = __webpack_require__(190);
+	var _store = __webpack_require__(192);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _reactRedux = __webpack_require__(163);
+	var _reactRedux = __webpack_require__(165);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var lastPartURL = window.location.href.split("//")[1].split("/")[window.location.href.split("//")[1].split("/").length - 1];
+	var queryArray = lastPartURL.split("?")[lastPartURL.split("?").length - 1].split("&").map(function (str) {
+		return {
+			key: str.split("=")[0],
+			value: str.split("=")[1]
+		};
+	});
+	var feedIntoObject = function feedIntoObject(arr) {
+		var Obj = {};
+		for (var i = 0; i < arr.length; i++) {
+			Obj[arr[i].key.toString()] = arr[i].value;
+		}
+		return Obj;
+	};
+	var queryObj = feedIntoObject(queryArray);
+
+	console.log(queryArray);
 
 	var initialState = {
 		isAvailable: true,
@@ -82,7 +100,10 @@
 			jobTitle: "Promote me",
 			jobDescription: "Use promoting skillz to promote me"
 		},
-		rateOffered: 1000
+		rateOffered: 1000,
+		feedback: "",
+		queryObj: queryObj,
+		isSubmitted: false
 	};
 
 	var store = (0, _store2.default)(initialState);
@@ -107,6 +128,7 @@
 	// 									jobDescription : response.data.job.jobDescription,
 	// 								},
 	// 		rateOffered         : response.data.rateOffered,
+	//		queryObj            : queryObj,
 	// 	}
 
 	// 	let store = configureStore(initialState)
@@ -19745,11 +19767,11 @@
 
 	var _PageContent2 = _interopRequireDefault(_PageContent);
 
-	var _reactRedux = __webpack_require__(163);
+	var _reactRedux = __webpack_require__(165);
 
-	var _redux = __webpack_require__(170);
+	var _redux = __webpack_require__(172);
 
-	var _actions = __webpack_require__(189);
+	var _actions = __webpack_require__(191);
 
 	var _actions2 = _interopRequireDefault(_actions);
 
@@ -19823,15 +19845,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _JobDescription = __webpack_require__(194);
+	var _JobDescription = __webpack_require__(162);
 
 	var _JobDescription2 = _interopRequireDefault(_JobDescription);
 
-	var _Buttons = __webpack_require__(162);
+	var _Buttons = __webpack_require__(163);
 
 	var _Buttons2 = _interopRequireDefault(_Buttons);
 
-	var _classnames = __webpack_require__(193);
+	var _classnames = __webpack_require__(164);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -19904,7 +19926,97 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(193);
+	var _Buttons = __webpack_require__(163);
+
+	var _Buttons2 = _interopRequireDefault(_Buttons);
+
+	var _classnames = __webpack_require__(164);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var JobDescription = function (_Component) {
+		_inherits(JobDescription, _Component);
+
+		function JobDescription() {
+			_classCallCheck(this, JobDescription);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(JobDescription).apply(this, arguments));
+		}
+
+		_createClass(JobDescription, [{
+			key: 'render',
+			value: function render() {
+
+				if (!this.props.wholeState.answer.isAnswered && !this.props.wholeState.isSubmitted) {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Job Description:'
+						),
+						_react2.default.createElement(
+							'h6',
+							null,
+							this.props.wholeState.job.jobDescription,
+							'  Do you accept?'
+						)
+					);
+				} else if (this.props.wholeState.answer.isAnswered && !this.props.wholeState.isSubmitted) {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Please provide us with feedback:'
+						)
+					);
+				} else {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'h2',
+							null,
+							'Thanks for your response!'
+						)
+					);
+				}
+			}
+		}]);
+
+		return JobDescription;
+	}(_react.Component);
+
+	exports.default = JobDescription;
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _classnames = __webpack_require__(164);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -19919,44 +20031,56 @@
 	var Buttons = function (_Component) {
 		_inherits(Buttons, _Component);
 
-		function Buttons() {
+		function Buttons(props, context) {
 			_classCallCheck(this, Buttons);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Buttons).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Buttons).call(this, props, context));
+
+			_this.state = {
+				feedback: "",
+				submitted: false
+			};
+			return _this;
 		}
 
 		_createClass(Buttons, [{
 			key: 'handleYes',
 			value: function handleYes() {
 				this.props.allActions.isAnswered(true);
-				// $.post('/saidYes',user).then(function (err,response) {
-				// 	if (err) {
-				// 		console.log("Something went wrong!")
-				// 	} else {
-				// 		this.props.allActions.isAnswered(true)
-				// 	}
-				// })
 			}
 		}, {
 			key: 'handleNo',
 			value: function handleNo() {
 				this.props.allActions.isAnswered(false);
-				// $.post('/saidNo',user).then(function (err,response) {
+			}
+		}, {
+			key: 'handleChange',
+			value: function handleChange(event) {
+				this.setState({
+					feedback: event.target.value
+				});
+				console.log(this.state.feedback);
+			}
+		}, {
+			key: 'handleFeedback',
+			value: function handleFeedback(event) {
+				event.preventDefault();
+				this.props.allActions.isSubmitted(this.state.feedback);
+				// $.post('/submission',this.props.wholeState).then(function (err,response) {
 				// 	if (err) {
 				// 		console.log("Something went wrong!")
 				// 	} else {
-				// 		this.props.allActions.isAnswered(false)
+				// 		console.log("Submission sent successfully!")
 				// 	}
 				// })
+				console.log(this.state.feedback);
+				this.setState({
+					submitted: true
+				});
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-				// console.log(this.props.allActions)
-				// console.log(this.wholeState)
-				// console.log(this.props.wholeState)
-				// console.log(this.props.wholeState.rejected)
-				// className={(this.state.accepted, 'hide')
 				if (!this.props.wholeState.answer.isAnswered) {
 					return _react2.default.createElement(
 						'div',
@@ -19973,47 +20097,40 @@
 						)
 					);
 				} else {
-					if (!this.props.wholeState.answer.isAccepted) {
-						return _react2.default.createElement(
-							'div',
-							null,
+					var title = this.props.wholeState.answer.isAccepted ? 'Why are you a good candidate for this position?' : 'What other jobs would you be more interested in?';
+					return !this.state.submitted ? _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'form',
+							{ onSubmit: this.handleFeedback.bind(this) },
 							_react2.default.createElement(
 								'div',
 								null,
-								_react2.default.createElement(
-									'div',
-									null,
-									'Please give us some feedback:'
-								),
-								_react2.default.createElement('textarea', { rows: '4', cols: '50' }),
-								_react2.default.createElement(
-									'button',
-									null,
-									'Send'
-								)
-							)
-						);
-					} else {
-						return _react2.default.createElement(
-							'div',
+								title
+							),
+							_react2.default.createElement('textarea', { rows: '4', cols: '50', value: this.state.feedback, onChange: this.handleChange.bind(this) }),
+							_react2.default.createElement('input', { type: 'submit', value: 'Submit Response' })
+						)
+					) : _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'h4',
 							null,
-							_react2.default.createElement(
-								'div',
-								null,
-								_react2.default.createElement(
-									'div',
-									null,
-									'Why are you a good candidate for the job?'
-								),
-								_react2.default.createElement('textarea', { rows: '4', cols: '50' }),
-								_react2.default.createElement(
-									'button',
-									null,
-									'Send'
-								)
-							)
-						);
-					}
+							'Your Feedback:'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							this.state.feedback
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'This has been sent to us.'
+						)
+					);
 				}
 			}
 		}]);
@@ -20024,7 +20141,61 @@
 	exports.default = Buttons;
 
 /***/ },
-/* 163 */
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20032,11 +20203,11 @@
 	exports.__esModule = true;
 	exports.connect = exports.Provider = undefined;
 
-	var _Provider = __webpack_require__(164);
+	var _Provider = __webpack_require__(166);
 
 	var _Provider2 = _interopRequireDefault(_Provider);
 
-	var _connect = __webpack_require__(167);
+	var _connect = __webpack_require__(169);
 
 	var _connect2 = _interopRequireDefault(_connect);
 
@@ -20046,7 +20217,7 @@
 	exports.connect = _connect2["default"];
 
 /***/ },
-/* 164 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20056,11 +20227,11 @@
 
 	var _react = __webpack_require__(2);
 
-	var _storeShape = __webpack_require__(165);
+	var _storeShape = __webpack_require__(167);
 
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 
-	var _warning = __webpack_require__(166);
+	var _warning = __webpack_require__(168);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -20130,7 +20301,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 165 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20146,7 +20317,7 @@
 	});
 
 /***/ },
-/* 166 */
+/* 168 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20175,7 +20346,7 @@
 	}
 
 /***/ },
-/* 167 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20187,31 +20358,31 @@
 
 	var _react = __webpack_require__(2);
 
-	var _storeShape = __webpack_require__(165);
+	var _storeShape = __webpack_require__(167);
 
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 
-	var _shallowEqual = __webpack_require__(168);
+	var _shallowEqual = __webpack_require__(170);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _wrapActionCreators = __webpack_require__(169);
+	var _wrapActionCreators = __webpack_require__(171);
 
 	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
 
-	var _warning = __webpack_require__(166);
+	var _warning = __webpack_require__(168);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _isPlainObject = __webpack_require__(183);
+	var _isPlainObject = __webpack_require__(185);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _hoistNonReactStatics = __webpack_require__(187);
+	var _hoistNonReactStatics = __webpack_require__(189);
 
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
-	var _invariant = __webpack_require__(188);
+	var _invariant = __webpack_require__(190);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -20574,7 +20745,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 168 */
+/* 170 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20605,7 +20776,7 @@
 	}
 
 /***/ },
-/* 169 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20613,7 +20784,7 @@
 	exports.__esModule = true;
 	exports["default"] = wrapActionCreators;
 
-	var _redux = __webpack_require__(170);
+	var _redux = __webpack_require__(172);
 
 	function wrapActionCreators(actionCreators) {
 	  return function (dispatch) {
@@ -20622,7 +20793,7 @@
 	}
 
 /***/ },
-/* 170 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20630,27 +20801,27 @@
 	exports.__esModule = true;
 	exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
 
-	var _createStore = __webpack_require__(171);
+	var _createStore = __webpack_require__(173);
 
 	var _createStore2 = _interopRequireDefault(_createStore);
 
-	var _combineReducers = __webpack_require__(178);
+	var _combineReducers = __webpack_require__(180);
 
 	var _combineReducers2 = _interopRequireDefault(_combineReducers);
 
-	var _bindActionCreators = __webpack_require__(180);
+	var _bindActionCreators = __webpack_require__(182);
 
 	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
 
-	var _applyMiddleware = __webpack_require__(181);
+	var _applyMiddleware = __webpack_require__(183);
 
 	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
 
-	var _compose = __webpack_require__(182);
+	var _compose = __webpack_require__(184);
 
 	var _compose2 = _interopRequireDefault(_compose);
 
-	var _warning = __webpack_require__(179);
+	var _warning = __webpack_require__(181);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -20674,7 +20845,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 171 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20683,11 +20854,11 @@
 	exports.ActionTypes = undefined;
 	exports["default"] = createStore;
 
-	var _isPlainObject = __webpack_require__(172);
+	var _isPlainObject = __webpack_require__(174);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _symbolObservable = __webpack_require__(176);
+	var _symbolObservable = __webpack_require__(178);
 
 	var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
 
@@ -20941,12 +21112,12 @@
 	}
 
 /***/ },
-/* 172 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(173),
-	    isHostObject = __webpack_require__(174),
-	    isObjectLike = __webpack_require__(175);
+	var getPrototype = __webpack_require__(175),
+	    isHostObject = __webpack_require__(176),
+	    isObjectLike = __webpack_require__(177);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -21017,7 +21188,7 @@
 
 
 /***/ },
-/* 173 */
+/* 175 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -21038,7 +21209,7 @@
 
 
 /***/ },
-/* 174 */
+/* 176 */
 /***/ function(module, exports) {
 
 	/**
@@ -21064,7 +21235,7 @@
 
 
 /***/ },
-/* 175 */
+/* 177 */
 /***/ function(module, exports) {
 
 	/**
@@ -21099,18 +21270,18 @@
 
 
 /***/ },
-/* 176 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
 	'use strict';
 
-	module.exports = __webpack_require__(177)(global || window || this);
+	module.exports = __webpack_require__(179)(global || window || this);
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 177 */
+/* 179 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21135,7 +21306,7 @@
 
 
 /***/ },
-/* 178 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -21143,13 +21314,13 @@
 	exports.__esModule = true;
 	exports["default"] = combineReducers;
 
-	var _createStore = __webpack_require__(171);
+	var _createStore = __webpack_require__(173);
 
-	var _isPlainObject = __webpack_require__(172);
+	var _isPlainObject = __webpack_require__(174);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _warning = __webpack_require__(179);
+	var _warning = __webpack_require__(181);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -21268,7 +21439,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 179 */
+/* 181 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21298,7 +21469,7 @@
 	}
 
 /***/ },
-/* 180 */
+/* 182 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21354,7 +21525,7 @@
 	}
 
 /***/ },
-/* 181 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21365,7 +21536,7 @@
 
 	exports["default"] = applyMiddleware;
 
-	var _compose = __webpack_require__(182);
+	var _compose = __webpack_require__(184);
 
 	var _compose2 = _interopRequireDefault(_compose);
 
@@ -21417,7 +21588,7 @@
 	}
 
 /***/ },
-/* 182 */
+/* 184 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -21462,12 +21633,12 @@
 	}
 
 /***/ },
-/* 183 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(184),
-	    isHostObject = __webpack_require__(185),
-	    isObjectLike = __webpack_require__(186);
+	var getPrototype = __webpack_require__(186),
+	    isHostObject = __webpack_require__(187),
+	    isObjectLike = __webpack_require__(188);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -21538,7 +21709,7 @@
 
 
 /***/ },
-/* 184 */
+/* 186 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -21559,7 +21730,7 @@
 
 
 /***/ },
-/* 185 */
+/* 187 */
 /***/ function(module, exports) {
 
 	/**
@@ -21585,7 +21756,7 @@
 
 
 /***/ },
-/* 186 */
+/* 188 */
 /***/ function(module, exports) {
 
 	/**
@@ -21620,7 +21791,7 @@
 
 
 /***/ },
-/* 187 */
+/* 189 */
 /***/ function(module, exports) {
 
 	/**
@@ -21666,7 +21837,7 @@
 
 
 /***/ },
-/* 188 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -21724,7 +21895,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 189 */
+/* 191 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21746,6 +21917,13 @@
 				type: 'IS_ANSWERED',
 				response: response
 			};
+		},
+
+		isSubmitted: function isSubmitted(response) {
+			return {
+				type: 'IS_SUBMITTED',
+				response: response
+			};
 		}
 
 	};
@@ -21753,7 +21931,7 @@
 	exports.default = actions;
 
 /***/ },
-/* 190 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21763,13 +21941,13 @@
 	});
 	exports.default = configureStore;
 
-	var _redux = __webpack_require__(170);
+	var _redux = __webpack_require__(172);
 
-	var _reducer = __webpack_require__(191);
+	var _reducer = __webpack_require__(193);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
-	var _reduxLogger = __webpack_require__(192);
+	var _reduxLogger = __webpack_require__(194);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
@@ -21787,7 +21965,7 @@
 	}
 
 /***/ },
-/* 191 */
+/* 193 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21811,6 +21989,12 @@
 					}
 				});
 
+			case 'IS_SUBMITTED':
+				return Object.assign({}, state, {
+					isSubmitted: true,
+					feedback: action.response
+				});
+
 			default:
 				return state;
 		}
@@ -21819,7 +22003,7 @@
 	exports.default = reducer;
 
 /***/ },
-/* 192 */
+/* 194 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -22050,140 +22234,6 @@
 	}
 
 	module.exports = createLogger;
-
-/***/ },
-/* 193 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2016 Jed Watson.
-	  Licensed under the MIT License (MIT), see
-	  http://jedwatson.github.io/classnames
-	*/
-	/* global define */
-
-	(function () {
-		'use strict';
-
-		var hasOwn = {}.hasOwnProperty;
-
-		function classNames () {
-			var classes = [];
-
-			for (var i = 0; i < arguments.length; i++) {
-				var arg = arguments[i];
-				if (!arg) continue;
-
-				var argType = typeof arg;
-
-				if (argType === 'string' || argType === 'number') {
-					classes.push(arg);
-				} else if (Array.isArray(arg)) {
-					classes.push(classNames.apply(null, arg));
-				} else if (argType === 'object') {
-					for (var key in arg) {
-						if (hasOwn.call(arg, key) && arg[key]) {
-							classes.push(key);
-						}
-					}
-				}
-			}
-
-			return classes.join(' ');
-		}
-
-		if (typeof module !== 'undefined' && module.exports) {
-			module.exports = classNames;
-		} else if (true) {
-			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-				return classNames;
-			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else {
-			window.classNames = classNames;
-		}
-	}());
-
-
-/***/ },
-/* 194 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Buttons = __webpack_require__(162);
-
-	var _Buttons2 = _interopRequireDefault(_Buttons);
-
-	var _classnames = __webpack_require__(193);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var JobDescription = function (_Component) {
-		_inherits(JobDescription, _Component);
-
-		function JobDescription() {
-			_classCallCheck(this, JobDescription);
-
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(JobDescription).apply(this, arguments));
-		}
-
-		_createClass(JobDescription, [{
-			key: 'render',
-			value: function render() {
-
-				if (!this.props.wholeState.answer.isAnswered) {
-					return _react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-							'h2',
-							null,
-							'Job Description:'
-						),
-						_react2.default.createElement(
-							'h6',
-							null,
-							this.props.wholeState.job.jobDescription,
-							'  Do you accept?'
-						)
-					);
-				} else {
-					return _react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-							'h2',
-							null,
-							'Thanks for your response.'
-						)
-					);
-				}
-			}
-		}]);
-
-		return JobDescription;
-	}(_react.Component);
-
-	exports.default = JobDescription;
 
 /***/ }
 /******/ ]);

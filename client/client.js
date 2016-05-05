@@ -4,7 +4,23 @@ import App from '../components/App'
 import configureStore from '../redux/store'
 import { Provider } from 'react-redux'
 
+let lastPartURL = window.location.href.split("//")[1].split("/")[window.location.href.split("//")[1].split("/").length - 1]
+let queryArray = lastPartURL.split("?")[lastPartURL.split("?").length - 1].split("&").map(function(str){
+	return {
+		key    : str.split("=")[0],
+		value  : str.split("=")[1],
+	}
+})
+let feedIntoObject = function (arr) {
+	var Obj = {}
+	for ( var i = 0; i < arr.length; i++ ) {
+		Obj[arr[i].key.toString()] = arr[i].value
+	}
+	return Obj
+}
+let queryObj = feedIntoObject(queryArray)
 
+console.log(queryArray)
 
 let initialState = {
 	isAvailable         : true,
@@ -18,6 +34,9 @@ let initialState = {
 								jobDescription : "Use promoting skillz to promote me",
 							},
 	rateOffered         : 1000,
+	feedback            : "",
+	queryObj            : queryObj,
+	isSubmitted         : false,
 }
 
 let store = configureStore(initialState)
@@ -43,6 +62,7 @@ render(
 // 									jobDescription : response.data.job.jobDescription,
 // 								},
 // 		rateOffered         : response.data.rateOffered,
+//		queryObj            : queryObj,
 // 	}
 
 // 	let store = configureStore(initialState)

@@ -14,6 +14,13 @@ let actions = {
 		}
 	},
 
+	isSubmitted: function(response) {
+		return {
+			type: 'IS_SUBMITTED',
+			response: response
+		}
+	},
+
 }
 
 export default actions

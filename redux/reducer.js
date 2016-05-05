@@ -14,6 +14,12 @@ let reducer = function(state, action) {
 				}
 			})
 
+		case 'IS_SUBMITTED':
+			return Object.assign({}, state, {
+				isSubmitted : true,
+				feedback    : action.response,
+			})
+
 		default: return state;
 	}
 }
